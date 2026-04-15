@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads Organizer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1 class="title">Downloads Organizer</h1>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0/0 (0%)</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="file-queue">
+                <h2 class="section-title">File Queue</h2>
+                <ul class="file-list" id="file-list">
+                    <li class="file-item loading">Loading files...</li>
+                </ul>
+            </aside>
+
+            <section class="file-preview">
+                <h2 class="section-title">Current File</h2>
+                <div class="preview-card" id="preview-card">
+                    <div class="preview-details">
+                        <p class="preview-name" id="preview-name">-</p>
+                        <p class="preview-info">Size: <span id="preview-size">-</span></p>
+                        <p class="preview-info">Type: <span id="preview-type">-</span></p>
+                        <p class="preview-info">Modified: <span id="preview-modified">-</span></p>
+                        <p class="preview-info">Path: <span id="preview-path">-</span></p>
+                    </div>
+                </div>
+
+                <div class="destination-section">
+                    <h2 class="section-title">Destination</h2>
+                    <div class="custom-path-container">
+                        <label class="label" for="destination-input">Path:</label>
+                        <div class="autocomplete-wrapper">
+                            <input 
+                                type="text" 
+                                id="destination-input" 
+                                class="destination-input" 
+                                placeholder="Enter or select folder path..."
+                                autocomplete="off"
+                            >
+                            <div class="autocomplete-dropdown" id="autocomplete-dropdown">
+                                <ul class="suggestions-list" id="suggestions-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="base-path-display">
+                        <span class="label">Base:</span>
+                        <span class="value clickable" id="base-path" title="Click to use as destination">-</span>
+                    </div>
+
+                    <div class="recent-destinations">
+                        <span class="label">Recent:</span>
+                        <ul class="recent-list" id="recent-list">
+                            <li class="recent-item" data-index="1">1. -</li>
+                            <li class="recent-item" data-index="2">2. -</li>
+                            <li class="recent-item" data-index="3">3. -</li>
+                            <li class="recent-item" data-index="4">4. -</li>
+                            <li class="recent-item" data-index="5">5. -</li>
+                            <li class="recent-item" data-index="6">6. -</li>
+                            <li class="recent-item" data-index="7">7. -</li>
+                            <li class="recent-item" data-index="8">8. -</li>
+                            <li class="recent-item" data-index="9">9. -</li>
+                            <li class="recent-item" data-index="10">10. -</li>
+                            <li class="recent-item" data-index="11">11. -</li>
+                            <li class="recent-item" data-index="12">12. -</li>
+                            <li class="recent-item" data-index="13">13. -</li>
+                            <li class="recent-item" data-index="14">14. -</li>
+                            <li class="recent-item" data-index="15">15. -</li>
+                            <li class="recent-item" data-index="16">16. -</li>
+                            <li class="recent-item" data-index="17">17. -</li>
+                            <li class="recent-item" data-index="18">18. -</li>
+                            <li class="recent-item" data-index="19">19. -</li>
+                            <li class="recent-item" data-index="20">20. -</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="btn-move" title="Enter">
+                    <span class="btn-icon">➔</span>
+                    <span class="btn-key">Enter</span>
+                </button>
+                <button class="btn" id="btn-skip" title="Skip (S)">
+                    <span class="btn-icon">⏭</span>
+                    <span class="btn-key">S</span>
+                </button>
+                <button class="btn" id="btn-rename" title="Rename (R)">
+                    <span class="btn-icon">✏️</span>
+                    <span class="btn-key">R</span>
+                </button>
+                <button class="btn" id="btn-undo" title="Undo (U)">
+                    <span class="btn-icon">↩️</span>
+                    <span class="btn-key">U</span>
+                </button>
+                <button class="btn btn-danger" id="btn-quit" title="Quit (Q)">
+                    <span class="btn-icon">⏹</span>
+                    <span class="btn-key">Q</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal" id="rename-modal">
+        <div class="modal-content">
+            <h3>Rename File</h3>
+            <input type="text" id="rename-input" class="rename-input" placeholder="New filename">
+            <div class="modal-buttons">
+                <button class="btn" id="rename-cancel">Cancel</button>
+                <button class="btn btn-primary" id="rename-confirm">Rename</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toast-message"></span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
